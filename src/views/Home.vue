@@ -81,7 +81,7 @@ export default {
       ) {
         this.bgmUrl = 'http://192.168.0.103:8080/wedding/bgm.mp3';
       } else {
-        this.bgmUrl = 'http://www.calicomoo.ml:8080/wedding/bgm.mp3';
+        this.bgmUrl = 'https://www.calicomoo.ml:8080/wedding/bgm.mp3';
       }
     }
   },
