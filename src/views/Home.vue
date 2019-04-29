@@ -29,7 +29,7 @@
 
 <script>
 // import axios from 'axios';
-import InvitationForm from '../component/InvitationForm.vue';
+import InvitationForm from '../components/InvitationForm.vue';
 
 export default {
   name: 'home',
@@ -52,6 +52,7 @@ export default {
       } else {
         setTimeout(() => {
           document.body.style.overflow = 'auto';
+          document.getElementById('invitation-form-container').style.display = 'block';
         }, 120);
       }
     },
@@ -79,7 +80,7 @@ export default {
         window.location.host.indexOf('localhost') > -1 ||
         window.location.host.indexOf('192.168.0.103') > -1
       ) {
-        this.bgmUrl = 'http://192.168.0.103:8080/wedding/bgm.mp3';
+        this.bgmUrl = 'https://192.168.0.103:8080/wedding/bgm.mp3';
       } else {
         this.bgmUrl = 'https://www.calicomoo.ml:8080/wedding/bgm.mp3';
       }

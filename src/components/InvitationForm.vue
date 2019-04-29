@@ -1,5 +1,5 @@
 <template>
-  <div id="invitation-form-container">
+  <div id="invitation-form-container" style="display:none;">
     <div class="content">
       <div class="title">邀請單</div>
       <div class="option">
