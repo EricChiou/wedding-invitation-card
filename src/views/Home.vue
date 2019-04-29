@@ -13,6 +13,7 @@
       <div class="end">
         <img src="../assets/images/page_3.jpg">
       </div>
+      <InvitationForm></InvitationForm>
     </div>
     <div class="cover">
       <div class="middle"></div>
@@ -27,9 +28,12 @@
 </template>
 
 <script>
+// import axios from 'axios';
+import InvitationForm from '../component/InvitationForm.vue';
+
 export default {
   name: 'home',
-  components: {},
+  components: { InvitationForm },
   data: () => ({ bgmUrl: '' }),
   methods: {
     animation() {
@@ -43,9 +47,12 @@ export default {
       if (opacity > 0) {
         setTimeout(() => {
           this.fade(cover, content, opacity - 0.05);
+          window.scrollTo({ left: 0, top: 0 });
         }, 60);
       } else {
-        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+          document.body.style.overflow = 'auto';
+        }, 120);
       }
     },
     sound() {
@@ -102,8 +109,8 @@ export default {
     .picture {
       position: absolute;
       top: 6%;
-      right: 11%;
-      left: 11%;
+      right: 16%;
+      left: 16%;
     }
   }
   img {
@@ -122,6 +129,7 @@ export default {
   right: 2px;
   opacity: 0.8;
   cursor: pointer;
+  z-index: 9999;
   img {
     width: 30px;
     height: 30px;
