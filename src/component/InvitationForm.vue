@@ -194,7 +194,7 @@ export default {};
   }
 
   @media only screen and (max-width: 767px) {
-    height: 840px;
+    height: 880px;
     .content {
       top: 9%;
       .title {

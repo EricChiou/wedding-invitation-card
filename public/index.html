@@ -19,8 +19,10 @@
 
   <script>
     if (/(FBAV|Line|wv|IAB|WebView)/.test(window.navigator.userAgent)) {
-      if (/(Android|android)/.test(window.navigator.userAgent)) {
-        window.location.href = 'googlechrome://navigate?url=www.calicomoo.ml/wedding';
+      if (/(Line|line)/.test(window.navigator.userAgent)) {
+        window.location.href = 'https://www.calicomoo.ml/wedding?openExternalBrowser=1';
+      } else if (/(Android|android)/.test(window.navigator.userAgent)) {
+        window.location.href = 'googlechrome://navigate?url=https://www.calicomoo.ml/wedding';
       } else if (/(iPod|iPad|iPhone)/.test(window.navigator.userAgent)) {
         window.location.href = 'googlechrome://www.calicomoo.ml/wedding';
       }
