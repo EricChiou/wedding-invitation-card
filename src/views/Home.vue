@@ -104,7 +104,7 @@ export default {
     axios
       .get('https://api.ipify.org/?format=json')
       .then(resp => {
-        console.log(response);
+        console.log(resp);
       })
       .catch(error => {
         console.log(error);
