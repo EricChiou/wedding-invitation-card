@@ -33,8 +33,8 @@
       </div>
       <div class="option-relation">
         <div class="sub-title">與新人關係：</div>
-        <input class="radio" type="radio" name="relation" value="男方">男方親友
-        <input class="radio" type="radio" name="relation" value="女方">女方親友
+        <input class="radio" type="radio" name="relation" value="男方親友">男方親友
+        <input class="radio" type="radio" name="relation" value="女方親友">女方親友
       </div>
       <div class="option-paper">
         <div class="sub-title">紙本喜帖：</div>
