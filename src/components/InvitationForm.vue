@@ -124,7 +124,7 @@ export default {
       axios
         .post(`https://${window.location.hostname}:6200/apply/add`, this.apply)
         .then(resp => {
-          if (resp.result === 'success') {
+          if (resp.data.result === 'success') {
             this.message = '送出完成';
           } else {
             console.log(resp);
