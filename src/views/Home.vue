@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import InvitationForm from '../components/InvitationForm.vue';
 
 export default {
@@ -93,22 +92,6 @@ export default {
     setTimeout(() => {
       this.animation();
     }, 1500);
-    axios
-      .get('https://ip.seeip.org/json')
-      .then(resp => {
-        console.log(resp);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    axios
-      .get('https://api.ipify.org/?format=json')
-      .then(resp => {
-        console.log(resp);
-      })
-      .catch(error => {
-        console.log(error);
-      });
   }
 };
 </script>

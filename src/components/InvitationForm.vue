@@ -4,27 +4,27 @@
       <div class="title">邀請單</div>
       <div class="option">
         <div class="sub-title">姓名：</div>
-        <input>
+        <input v-model="apply.name">
       </div>
       <div class="option">
         <div class="sub-title">人數：</div>
-        <input type="number" min="0" placeholder="請填數字">
+        <input type="number" min="0" placeholder="請填數字" v-model="apply.number">
       </div>
       <div class="option">
         <div class="sub-title">素食：</div>
-        <input type="number" min="0" placeholder="請填數字">
+        <input type="number" min="0" placeholder="請填數字" v-model="apply.vegetarian">
       </div>
       <div class="option">
         <div class="sub-title">手機：</div>
-        <input>
+        <input v-model="apply.phone">
       </div>
       <div class="option">
         <div class="sub-title">Email：</div>
-        <input>
+        <input v-model="apply.email">
       </div>
       <div class="option">
         <div class="sub-title">Line：</div>
-        <input>
+        <input v-model="apply.line">
       </div>
       <div>
         *請至少留一項聯絡方式
@@ -33,34 +33,122 @@
       </div>
       <div class="option-relation">
         <div class="sub-title">與新人關係：</div>
-        <input class="radio" type="radio" name="relation" value="男方親友">男方親友
-        <input class="radio" type="radio" name="relation" value="女方親友">女方親友
+        <input class="radio" type="radio" name="relation" value="男方親友" v-model="apply.relation">男方親友
+        <input class="radio" type="radio" name="relation" value="女方親友" v-model="apply.relation">女方親友
       </div>
       <div class="option-paper">
         <div class="sub-title">紙本喜帖：</div>
-        <input class="radio" type="radio" name="paper" value="true">是
-        <input class="radio" type="radio" name="paper" value="false" checked>否
+        <input class="radio" type="radio" name="paper" value="true" v-model="apply.card">是
+        <input class="radio" type="radio" name="paper" value="false" checked v-model="apply.card">否
       </div>
       <div class="option-address">
         <div class="sub-title">地址：</div>
-        <input>
+        <input v-model="apply.address">
       </div>
       <div class="option-other">
         有其他需求或有什麼話想對我們說嗎：
         <br>
-        <textarea></textarea>
+        <textarea v-model="apply.other"></textarea>
       </div>
       <div class="send">
-        <button>送出</button>
+        <button v-if="!loading" @click="send">送出</button>
+        <button v-if="loading" disabled>傳送中</button>
       </div>
     </div>
     <img class="bg" src="../assets/images/join_bg.jpg">
     <img class="bg-m" src="../assets/images/join_bg_m.jpg">
+    <div v-if="showDialog" @click="close">
+      <Dialog v-bind:message="message"></Dialog>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import axios from 'axios';
+
+import Dialog from './Dialog.vue';
+
+export default {
+  components: { Dialog },
+  data: () => ({
+    apply: {
+      name: '',
+      number: 0,
+      vegetarian: 0,
+      phone: '',
+      email: '',
+      line: '',
+      relation: '',
+      card: false,
+      address: '',
+      other: ''
+    },
+    loading: false,
+    message: '',
+    showDialog: false
+  }),
+  methods: {
+    send() {
+      this.apply.number = Number(this.apply.number);
+      this.apply.vegetarian = Number(this.apply.vegetarian);
+      this.apply.card = this.apply.card === 'true';
+      if (this.loading) {
+        return;
+      }
+      if (!this.apply.name) {
+        this.message = '請輸入姓名';
+        this.showDialog = true;
+        return;
+      }
+      if (!this.apply.number) {
+        this.message = '請輸入人數';
+        this.showDialog = true;
+        return;
+      }
+      if (!this.apply.phone && !this.apply.email && !this.apply.line) {
+        this.message = '請至少留一項聯絡方式';
+        this.showDialog = true;
+        return;
+      }
+      if (!this.apply.relation) {
+        this.message = '請選擇與新人關係';
+        this.showDialog = true;
+        return;
+      }
+      if (this.apply.card && !this.apply.address) {
+        this.message = '請留喜帖寄送地址';
+        this.showDialog = true;
+        return;
+      }
+      this.loading = true;
+      axios
+        .post(`https://${window.location.hostname}:6200/apply/add`, this.apply)
+        .then(resp => {
+          if (resp.result === 'success') {
+            this.message = '送出完成';
+          } else {
+            console.log(resp);
+            this.message = '送出失敗';
+          }
+          this.showDialog = true;
+          this.loading = false;
+        })
+        .catch(error => {
+          console.error(error);
+          this.message = '送出失敗';
+          this.loading = false;
+        });
+    },
+    close(event) {
+      if (
+        event.target.className === 'mask' ||
+        event.target.className === 'confirm'
+      ) {
+        this.showDialog = false;
+      }
+    }
+  }
+};
 </script>
 
 
