@@ -109,8 +109,8 @@ export default {
     .picture {
       position: absolute;
       top: 6%;
-      right: 16%;
-      left: 16%;
+      right: 12%;
+      left: 12%;
     }
   }
   img {
