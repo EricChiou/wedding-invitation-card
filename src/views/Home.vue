@@ -75,14 +75,7 @@ export default {
         });
     },
     getBgmUrl() {
-      if (
-        window.location.host.indexOf('localhost') > -1 ||
-        window.location.host.indexOf('192.168.0.103') > -1
-      ) {
-        this.bgmUrl = 'https://192.168.0.103:8080/wedding/bgm.mp3';
-      } else {
-        this.bgmUrl = 'https://www.calicomoo.ml:8080/wedding/bgm.mp3';
-      }
+      this.bgmUrl = 'https://www.calicomoomoo.ml/file/music/purity_of_your_smile.mp3';
     }
   },
   created() {
